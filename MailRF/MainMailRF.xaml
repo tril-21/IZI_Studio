@@ -1,0 +1,686 @@
+﻿<Window x:Class="IZI_Studio.MailRF.MainMailRF"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IZI_Studio.MailRF"
+        mc:Ignorable="d" Height="700" Width="1200" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" MinWidth="1200" MinHeight="700" MaxWidth="1200" MaxHeight="700" FontFamily="Times New Roman" FontSize="18" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Closing="Window_Closing" Title="Почта РФ" Icon="Иконка.png">
+    <Window.Resources>
+        <ImageBrush x:Key="add_case" ImageSource="Assets\add case press.png" Stretch="Uniform"></ImageBrush>
+        <ImageBrush x:Key="delete_case" ImageSource="Assets\delete case press.png" Stretch="Uniform"></ImageBrush>
+        <ImageBrush x:Key="update" ImageSource="Assets\update press.png" Stretch="Uniform"></ImageBrush>
+        <ImageBrush x:Key="create_letter" ImageSource="Assets\create letter press.png" Stretch="Uniform"></ImageBrush>
+        <ImageBrush x:Key="open_file_doc" ImageSource="Assets\open file doc press.png" Stretch="Uniform"></ImageBrush>
+        <ImageBrush x:Key="download_file" ImageSource="Assets\download file letter press.png" Stretch="Uniform"></ImageBrush>
+        <ImageBrush x:Key="open_file_notice" ImageSource="Assets\open file notice press.png" Stretch="Uniform"></ImageBrush>
+        <ImageBrush x:Key="open_file" ImageSource="Assets\open file press.png" Stretch="Uniform"></ImageBrush>
+        <ImageBrush x:Key="add_notice" ImageSource="Assets\add notice press.png" Stretch="Uniform"></ImageBrush>
+
+        <Style x:Key="addcaseStyle" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle">
+                <Setter.Value>
+                    <Style>
+                        <Setter Property="Control.Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Rectangle Margin="2" SnapsToDevicePixels="True" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="#FFDDDDDD"/>
+            <Setter Property="BorderBrush" Value="#FF707070"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="True">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource add_case}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF3C7FB1"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource add_case}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF2C628B"/>
+                            </Trigger>
+                            <Trigger Property="ToggleButton.IsChecked" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="#FFBCDDEE"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF245A83"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" TargetName="border" Value="#FFF4F4F4"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FFADB2B5"/>
+                                <Setter Property="Foreground" Value="#FF838383"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="deletecaseStyle" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle">
+                <Setter.Value>
+                    <Style>
+                        <Setter Property="Control.Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Rectangle Margin="2" SnapsToDevicePixels="True" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="#FFDDDDDD"/>
+            <Setter Property="BorderBrush" Value="#FF707070"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="True">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource delete_case}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF3C7FB1"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource delete_case}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF2C628B"/>
+                            </Trigger>
+                            <Trigger Property="ToggleButton.IsChecked" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="#FFBCDDEE"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF245A83"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" TargetName="border" Value="#FFF4F4F4"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FFADB2B5"/>
+                                <Setter Property="Foreground" Value="#FF838383"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="updateStyle" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle">
+                <Setter.Value>
+                    <Style>
+                        <Setter Property="Control.Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Rectangle Margin="2" SnapsToDevicePixels="True" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="#FFDDDDDD"/>
+            <Setter Property="BorderBrush" Value="#FF707070"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="True">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource update}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF3C7FB1"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource update}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF2C628B"/>
+                            </Trigger>
+                            <Trigger Property="ToggleButton.IsChecked" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="#FFBCDDEE"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF245A83"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" TargetName="border" Value="#FFF4F4F4"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FFADB2B5"/>
+                                <Setter Property="Foreground" Value="#FF838383"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="updateletterStyle" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle">
+                <Setter.Value>
+                    <Style>
+                        <Setter Property="Control.Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Rectangle Margin="2" SnapsToDevicePixels="True" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="#FFDDDDDD"/>
+            <Setter Property="BorderBrush" Value="#FF707070"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="True">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource update}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF3C7FB1"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource update}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF2C628B"/>
+                            </Trigger>
+                            <Trigger Property="ToggleButton.IsChecked" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="#FFBCDDEE"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF245A83"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" TargetName="border" Value="#FFF4F4F4"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FFADB2B5"/>
+                                <Setter Property="Foreground" Value="#FF838383"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="createletterStyle" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle">
+                <Setter.Value>
+                    <Style>
+                        <Setter Property="Control.Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Rectangle Margin="2" SnapsToDevicePixels="True" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="#FFDDDDDD"/>
+            <Setter Property="BorderBrush" Value="#FF707070"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="True">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource create_letter}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF3C7FB1"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource create_letter}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF2C628B"/>
+                            </Trigger>
+                            <Trigger Property="ToggleButton.IsChecked" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="#FFBCDDEE"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF245A83"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" TargetName="border" Value="#FFF4F4F4"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FFADB2B5"/>
+                                <Setter Property="Foreground" Value="#FF838383"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="openfiledocStyle" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle">
+                <Setter.Value>
+                    <Style>
+                        <Setter Property="Control.Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Rectangle Margin="2" SnapsToDevicePixels="True" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="#FFDDDDDD"/>
+            <Setter Property="BorderBrush" Value="#FF707070"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="True">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource open_file_doc}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF3C7FB1"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource open_file_doc}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF2C628B"/>
+                            </Trigger>
+                            <Trigger Property="ToggleButton.IsChecked" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="#FFBCDDEE"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF245A83"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" TargetName="border" Value="#FFF4F4F4"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FFADB2B5"/>
+                                <Setter Property="Foreground" Value="#FF838383"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="downloadStyle" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle">
+                <Setter.Value>
+                    <Style>
+                        <Setter Property="Control.Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Rectangle Margin="2" SnapsToDevicePixels="True" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="#FFDDDDDD"/>
+            <Setter Property="BorderBrush" Value="#FF707070"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="True">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource download_file}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF3C7FB1"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource download_file}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF2C628B"/>
+                            </Trigger>
+                            <Trigger Property="ToggleButton.IsChecked" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="#FFBCDDEE"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF245A83"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" TargetName="border" Value="#FFF4F4F4"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FFADB2B5"/>
+                                <Setter Property="Foreground" Value="#FF838383"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="openfilenoticeStyle" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle">
+                <Setter.Value>
+                    <Style>
+                        <Setter Property="Control.Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Rectangle Margin="2" SnapsToDevicePixels="True" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="#FFDDDDDD"/>
+            <Setter Property="BorderBrush" Value="#FF707070"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="True">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource open_file_notice}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF3C7FB1"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource open_file_notice}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF2C628B"/>
+                            </Trigger>
+                            <Trigger Property="ToggleButton.IsChecked" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="#FFBCDDEE"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF245A83"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" TargetName="border" Value="#FFF4F4F4"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FFADB2B5"/>
+                                <Setter Property="Foreground" Value="#FF838383"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="openfileStyle" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle">
+                <Setter.Value>
+                    <Style>
+                        <Setter Property="Control.Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Rectangle Margin="2" SnapsToDevicePixels="True" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="#FFDDDDDD"/>
+            <Setter Property="BorderBrush" Value="#FF707070"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="True">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource open_file}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF3C7FB1"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource open_file}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF2C628B"/>
+                            </Trigger>
+                            <Trigger Property="ToggleButton.IsChecked" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="#FFBCDDEE"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF245A83"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" TargetName="border" Value="#FFF4F4F4"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FFADB2B5"/>
+                                <Setter Property="Foreground" Value="#FF838383"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="addnoticeStyle" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle">
+                <Setter.Value>
+                    <Style>
+                        <Setter Property="Control.Template">
+                            <Setter.Value>
+                                <ControlTemplate>
+                                    <Rectangle Margin="2" SnapsToDevicePixels="True" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="#FFDDDDDD"/>
+            <Setter Property="BorderBrush" Value="#FF707070"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="True">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource add_notice}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF3C7FB1"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource add_notice}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF2C628B"/>
+                            </Trigger>
+                            <Trigger Property="ToggleButton.IsChecked" Value="True">
+                                <Setter Property="Background" TargetName="border" Value="#FFBCDDEE"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FF245A83"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" TargetName="border" Value="#FFF4F4F4"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FFADB2B5"/>
+                                <Setter Property="Foreground" Value="#FF838383"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Window.Background>
+        <ImageBrush ImageSource="Assets\общий фон.png" Stretch="Uniform"/>
+    </Window.Background>
+    <Grid ShowGridLines="False" Name="MainGrid" HorizontalAlignment="Stretch" Margin="0" VerticalAlignment="Stretch" OpacityMask="Black">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="107*"/>
+            <ColumnDefinition Width="490*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.3*"></RowDefinition>
+            <RowDefinition Height="0.7*"></RowDefinition>
+            <RowDefinition Height="8.2*"></RowDefinition>
+            <RowDefinition Height="0.7*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Name="ForToolBar" ShowGridLines="False" Grid.Row="0" HorizontalAlignment="Stretch" Margin="5,0,5,0" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="7.5*"></ColumnDefinition>
+                <ColumnDefinition Width="2.5*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+        </Grid>
+        <Grid Name="ForButtonBar" ShowGridLines="False" Grid.Row="1" HorizontalAlignment="Stretch" Margin="5,0,5,0" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="8*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" ShowGridLines="false" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Content="" VerticalContentAlignment="Center" ToolTip="Добавить дело в список" Grid.Column="0" HorizontalAlignment="Stretch" Margin="5,5,5,5" VerticalAlignment="Stretch" FontSize="36" Click="Button_Click" Foreground="{x:Null}" BorderBrush="{x:Null}" BorderThickness="0" Style="{DynamicResource addcaseStyle}">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Assets/add case.png" Stretch="Uniform"></ImageBrush>
+                    </Button.Background>
+                </Button>
+                <Button Content="" VerticalContentAlignment="Center" ToolTip="Убрать дело из списка" Grid.Column="1" HorizontalAlignment="Stretch" Margin="5,5,5,5" VerticalAlignment="Stretch" FontSize="36" Click="Button_Click_1" BorderThickness="0" Style="{DynamicResource deletecaseStyle}">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Assets/delete case.png" Stretch="Uniform"></ImageBrush>
+                    </Button.Background>
+                </Button>
+                <Button Content="" VerticalContentAlignment="Center" ToolTip="Обновить список дел" Grid.Column="4" HorizontalAlignment="Stretch" Margin="5,5,5,5" VerticalAlignment="Stretch" FontSize="36" Click="Button_Click_5" BorderThickness="0" Style="{DynamicResource updateStyle}">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Assets/update .png" Stretch="Uniform"></ImageBrush>
+                    </Button.Background>
+                </Button>
+            </Grid>
+            <Grid Name="Letter_Bar" Grid.Column="1" ShowGridLines="False" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="5,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Button Name="user_create" Content="" ToolTip="Создать отправление" Grid.Column="0" HorizontalAlignment="Stretch" Margin="5,5,5,5" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="36" Click="Button_Click_2" BorderThickness="0" Style="{DynamicResource createletterStyle}">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Assets/create letter.png" Stretch="Uniform"></ImageBrush>
+                    </Button.Background>
+                </Button>
+                <Button Name="user_open" Content="" ToolTip="Открыть файл отправления" Grid.Column="1" HorizontalAlignment="Stretch" Margin="5,5,5,5" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="36" Click="Button_Click_3" BorderThickness="0" Style="{DynamicResource openfiledocStyle}">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Assets/open file doc.png" Stretch="Uniform"></ImageBrush>
+                    </Button.Background>
+                </Button>
+                <Button Name="user_download" Content="" ToolTip="Скачать файл отправления" Grid.Column="2" HorizontalAlignment="Stretch" Margin="5,5,5,5" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="36" Click="Button_Click_4" BorderThickness="0" Style="{DynamicResource downloadStyle}">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Assets/download file letter.png" Stretch="Uniform"></ImageBrush>
+                    </Button.Background>
+                </Button>
+                <Button Name="open_notice" Content="" ToolTip="Открыть отчёт" Grid.Column="3" HorizontalAlignment="Stretch" Margin="5,5,5,5" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="36" Click="open_notice_Click" BorderThickness="0" Style="{DynamicResource openfilenoticeStyle}">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Assets/open file notice.png" Stretch="Uniform"></ImageBrush>
+                    </Button.Background>
+                </Button>
+                <Button Name="admin_open_letter" Content="" ToolTip="Открыть отправление" Grid.Column="4" HorizontalAlignment="Stretch" Margin="5,5,5,5" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="36" Click="admin_open_letter_Click" BorderThickness="0" Style="{DynamicResource openfileStyle}">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Assets/open file.png" Stretch="Uniform"></ImageBrush>
+                    </Button.Background>
+                </Button>
+                <Button Name="update_letter" Content="" ToolTip="Обновить список писем" Grid.Column="5" HorizontalAlignment="Stretch" Margin="5,5,5,5" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="36" Click="update_letter_Click" BorderThickness="0" Style="{DynamicResource updateletterStyle}">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Assets/update .png" Stretch="Uniform"></ImageBrush>
+                    </Button.Background>
+                </Button>
+                <Button Name="admin_open_notice" Content="" ToolTip="Открыть форму добавления отчета" Grid.Column="6" HorizontalAlignment="Stretch" Margin="5,5,5,5" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="36" BorderThickness="0" Click="admin_open_notice_Click" Style="{DynamicResource addnoticeStyle}">
+                    <Button.Background>
+                        <ImageBrush ImageSource="Assets/add notice.png" Stretch="Uniform"></ImageBrush>
+                    </Button.Background>
+                </Button>
+
+            </Grid>
+        </Grid>
+        <Grid Name="ForDataGrid" ShowGridLines="False" Grid.Row="2" HorizontalAlignment="Stretch" Margin="5,0,5,0" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="140*"></ColumnDefinition>
+                <ColumnDefinition Width="34*"/>
+                <ColumnDefinition Width="63*"/>
+                <ColumnDefinition Width="452*"></ColumnDefinition>
+                <ColumnDefinition Width="495*"/>
+            </Grid.ColumnDefinitions>
+            <DataGrid Name="List_Delo" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" ColumnWidth="229"  CanUserResizeColumns="False" CanUserReorderColumns="False" IsReadOnly="True" MouseLeftButtonUp="List_Delo_MouseLeftButtonUp" Grid.ColumnSpan="3" Margin="0,5,0,0">
+            </DataGrid>
+            <DataGrid Name="List_Letter" Grid.Column="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"  CanUserResizeColumns="False" CanUserReorderColumns="False" IsReadOnly="True" ColumnWidth="*" MouseLeftButtonUp="List_Letter_MouseLeftButtonUp" Margin="5,5,0,0" Grid.ColumnSpan="2" />
+        </Grid>
+        <Grid Name="ForOtherBar" ShowGridLines="False" Grid.Row="3" HorizontalAlignment="Stretch" Margin="5,0,5,0" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="120"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Label Content="Выбранное дело: " Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Margin="0,0,0,0" FontSize="12" VerticalAlignment="Center"/>
+            <Label Content="Выбранное письмо: " Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Margin="0,0,0,0" FontSize="12" VerticalAlignment="Center"/>
+            <Label Name="Selected_Delo_Info" Content="---" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" Margin="0,0,0,0" FontSize="12" VerticalAlignment="Center"/>
+            <Label Name="Selected_Letter_Info" Content="---" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Margin="0,0,0,0" FontSize="12" VerticalAlignment="Center"/>
+        </Grid>
+    </Grid>
+</Window>

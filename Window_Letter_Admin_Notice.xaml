@@ -1,0 +1,29 @@
+﻿<Window x:Class="IZI_Studio.Window_Letter_Admin_Notice"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IZI_Studio"
+        mc:Ignorable="d" Height="200" Width="600" MinWidth="600" MinHeight="200" FontFamily="Times New Roman" FontSize="14" ResizeMode="NoResize" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen" Closed="Window_Closed" Icon="Assets/Иконка.png">
+    <Grid>
+        <Grid HorizontalAlignment="Stretch" Margin="25,25,25,25" VerticalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.25*"></ColumnDefinition>
+                <ColumnDefinition Width="0.57*"></ColumnDefinition>
+                <ColumnDefinition Width="0.18*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.3*"></RowDefinition>
+                <RowDefinition Height="0.3*"></RowDefinition>
+                <RowDefinition Height="0.3*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Content="Отчет:" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0"  Margin="10,0,10,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" />
+            <Label Content="Ошибки:" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" Grid.Column="0"  Margin="10,0,10,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" />
+            <TextBox Name="text_notice" Grid.Column="1" HorizontalAlignment="Stretch" Margin="10,10,10,10" Grid.Row="0" TextWrapping="Wrap" Text="" VerticalAlignment="Stretch" UndoLimit="1000" IsReadOnly="True" VerticalContentAlignment="Center"/>
+            <TextBox Name="text_errors" Grid.Column="1" HorizontalAlignment="Stretch" Margin="10,10,10,10" Grid.Row="1" TextWrapping="Wrap" Text="" VerticalAlignment="Stretch" UndoLimit="1000" IsReadOnly="True" VerticalContentAlignment="Center"/>
+            <Button Name="button_insert_notice" Grid.Column="2" Grid.Row="0" Content="Добавить" HorizontalAlignment="Stretch" Margin="5,0,5,0" VerticalAlignment="Center" Click="button_insert_notice_Click"/>
+            <Button Name="button_change_errors" Grid.Column="2" Grid.Row="1" Content="Изменить" HorizontalAlignment="Stretch" Margin="5,0,5,0" VerticalAlignment="Center" Click="button_change_errors_Click"/>
+            <Button Name="button_save_notice" Grid.Column="2" Grid.Row="2" Content="Изменить" HorizontalAlignment="Stretch" Margin="5,0,5,0" VerticalAlignment="Center" Click="button_save_notice_Click"/>
+        </Grid>
+    </Grid>
+</Window>
